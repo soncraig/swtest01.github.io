@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Savior of the World, Green Cast, 2023</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .card>h5 {
+            background-color: #C6D5A1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Savior of the World, Green Cast, 2023</h1>
+
+        <div class="btn-group mb-3">
+            <button type="button" class="btn btn-secondary filter mr-1" data-letter="all">All</button>
+            <!-- Generate filter buttons dynamically -->
+            <!-- This section will be populated with filter buttons -->
+            <div id="filterButtons"></div>
+        </div>
+
+        <!-- Role Filter Input -->
+        <div class="form-group">
+            <label for="roleFilter">Filter by Role:</label>
+            <input type="text" class="form-control" id="roleFilter" placeholder="Enter Role">
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
+        </div>
+
+        <div class="card-columns" id="cardColumns">
+            <!-- Cards will be populated here using JavaScript -->
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // JSON data
+        var jsonData = [{"Last Name":"Baldemar","First Name":"Carlitos","Full Name":"Carlitos Baldemar","Role":"Temple Boy 3, Beggar, John the Baptist","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Baldemar","First Name":"Carlos","Full Name":"Carlos Baldemar","Role":"Andrew, Micah","Temple":"Deck","Act 1-X":"Colonnade","Census":"OFFSTAGE","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Baldemar","First Name":"Analisse","Full Name":"Analisse Baldemar","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Baldemar","First Name":"Aurora","Full Name":"Aurora Baldemar","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Baldemar","First Name":"Arianna","Full Name":"Arianna Baldemar","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Beck","First Name":"Madison","Full Name":"Madison Beck","Role":"Salome","Temple":"Deck","Act 1-X":"G1A","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"G5","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Black","First Name":"HeatherJane","Full Name":"HeatherJane Black","Role":"Ensemble","Temple":"Deck","Act 1-X":"G1A","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Bons","First Name":"Stephen","Full Name":"Stephen Bons","Role":"Mary's Father, Nathanael","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"Deck (Role)","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"G4","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Brinkerhoff","First Name":"Aubrey","Full Name":"Aubrey Brinkerhoff","Role":"Mary Magdalene","Temple":"Deck","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"OFFSTAGE","Resurrection":"MARY MAG","Act 2-Xa":"Deck (Role)","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Brown","First Name":"David","Full Name":"David Brown","Role":"Luke","Temple":"Colonnade","Act 1-X":"G1B","Census":"Colonnade","Manger":"Colonnade (Role)","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G1"},{"Last Name":"Brown","First Name":"Nancy","Full Name":"Nancy Brown","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"G1B","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G1"},{"Last Name":"Browne","First Name":"Chip","Full Name":"Chip Browne","Role":"Temple Priest 2-A, Soldier 1","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck (Role)","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Burton","First Name":"Melissa","Full Name":"Melissa Burton","Role":"Tirzah","Temple":"Deck","Act 1-X":"G1A","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"ALLELUIA","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Chang","First Name":"Wei","Full Name":"Wei Chang","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"G6B","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Combe","First Name":"Kelan","Full Name":"Kelan Combe","Role":"Eli, Simon Zelotes","Temple":"SHEPHERD","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Conterio","First Name":"Lisa","Full Name":"Lisa Conterio","Role":"Ensemble","Temple":"Deck","Act 1-X":"G1B","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Cropper","First Name":"Judy","Full Name":"Judy Cropper","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Cropper","First Name":"Davis","Full Name":"Davis Cropper","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"G6B","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Cropper","First Name":"Kyle","Full Name":"Kyle Cropper","Role":"Thomas","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"Deck (Role)","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Crossley","First Name":"Shera","Full Name":"Shera Crossley","Role":"Ensemble","Temple":"Deck","Act 1-X":"G1C","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"G6B","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Dalley","First Name":"Hannah","Full Name":"Hannah Dalley","Role":"Mary","Temple":"Deck (Role)","Act 1-X":"Deck (Role)","Census":"OFFSTAGE","Manger":"Deck (Role)","Resurrection":"OFFSTAGE","Act 2-Xa":"Deck (Role)","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Edgington","First Name":"Stuart","Full Name":"Stuart Edgington","Role":"Temple Priest 6-E, Upper Room 2","Temple":"Deck (Role)","Act 1-X":"G1C","Census":"B1","Manger":"Colonnade","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Elwood","First Name":"Oaklee","Full Name":"Oaklee Elwood","Role":"Ensemble","Temple":"Deck","Act 1-X":"G1C","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Elwood","First Name":"Abby","Full Name":"Abby Elwood","Role":"Joanna","Temple":"Deck","Act 1-X":"G1C","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"Colonnade","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Flores","First Name":"Fran","Full Name":"Fran Flores","Role":"Thaddeus, Malachi","Temple":"Colonnade (Role)","Act 1-X":"G1B","Census":"Colonnade","Manger":"MM","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Gardner","First Name":"Tian","Full Name":"Tian Gardner","Role":"Reuben/John","Temple":"Deck","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"OFFSTAGE","Act 2-Xa":"Deck (Role)","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Gardner","First Name":"Noelle","Full Name":"Noelle Gardner","Role":"Cousin 2","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"G3","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Gardner","First Name":"Tian","Full Name":"Tian Gardner","Role":"Reuben","Temple":"Deck","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Hatch","First Name":"Lauren","Full Name":"Lauren Hatch","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Hutchings","First Name":"Lucy","Full Name":"Lucy Hutchings","Role":"Ensemble","Temple":"Deck","Act 1-X":"G4","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Hutchings","First Name":"Marlo","Full Name":"Marlo Hutchings","Role":"Ensemble","Temple":"Deck","Act 1-X":"G4","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Hutchings","First Name":"Carl","Full Name":"Carl Hutchings","Role":"Temple Boy 4, Joshua","Temple":"Deck (Role)","Act 1-X":"G4","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Hutchings","First Name":"Brian","Full Name":"Brian Hutchings","Role":"Temple Priest 5-D, Upper Room 3","Temple":"Deck (Role)","Act 1-X":"G4","Census":"Colonnade","Manger":"MM","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Kerby","First Name":"Lindy","Full Name":"Lindy Kerby","Role":"Suzanna","Temple":"Deck","Act 1-X":"G5","Census":"Colonnade","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"ALLELUIA","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Longhurst","First Name":"Russell","Full Name":"Russell Longhurst","Role":"Jeshua, James Alpheus","Temple":"Colonnade","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Mahana","First Name":"Jordan","Full Name":"Jordan Mahana","Role":"Aaron","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G4"},{"Last Name":"Mahana","First Name":"Amelia","Full Name":"Amelia Mahana","Role":"Cousin 5","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G4"},{"Last Name":"Mahana","First Name":"Sawyer","Full Name":"Sawyer Mahana","Role":"Temple Boy 5","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G4"},{"Last Name":"Mahana","First Name":"Danette","Full Name":"Danette Mahana","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G4"},{"Last Name":"Mahana","First Name":"Violette","Full Name":"Violette Mahana","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Mahana","First Name":"Michael","Full Name":"Michael Mahana","Role":"Cleopas","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"OFFSTAGE","Alleluia":"OFFSTAGE","Act 2-Xb":"Deck (Role)"},{"Last Name":"Mahana","First Name":"Daniel","Full Name":"Daniel Mahana","Role":"Jacob","Temple":"Colonnade","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"SM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G4"},{"Last Name":"Matheson","First Name":"Peggy","Full Name":"Peggy Matheson","Role":"Mary MOJ","Temple":"Deck","Act 1-X":"G5","Census":"Colonnade","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"G5","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Mitchell","First Name":"Madelyn","Full Name":"Madelyn Mitchell","Role":"Cousin 3","Temple":"Deck","Act 1-X":"G3A","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Mitchell","First Name":"David","Full Name":"David Mitchell","Role":"Joseph","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"Deck","Manger":"Deck (Role)","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Moss","First Name":"Karen","Full Name":"Karen Moss","Role":"Hannah","Temple":"Deck","Act 1-X":"G3A","Census":"Deck","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"ALLELUIA","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Ostler","First Name":"Garrett","Full Name":"Garrett Ostler","Role":"Temple Priest 8-G, Nicodemus","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"MM","Resurrection":"Colonnade","Act 2-Xa":"G4","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Parry","First Name":"Eliza","Full Name":"Eliza Parry","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G1"},{"Last Name":"Parry","First Name":"Emily","Full Name":"Emily Parry","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G1"},{"Last Name":"Ramsey","First Name":"Jude","Full Name":"Jude Ramsey","Role":"Temple Boy 1, Mary's Brother","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck (Role)","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"G6A","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Ramsey","First Name":"Mike","Full Name":"Mike Ramsey","Role":"Peter, Asa","Temple":"SHEPHERD","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"OFFSTAGE","Resurrection":"OFFSTAGE","Act 2-Xa":"Deck (Role)","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Rayburn","First Name":"Joshua","Full Name":"Joshua Rayburn","Role":"Roman Statesman, Temple Priest 7-F, Upper Room 1","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck (Role)","Manger":"Colonnade","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Reese","First Name":"Daniel","Full Name":"Daniel Reese","Role":"Angel to Joseph, Ascension Angel 1","Temple":"COLONNADE","Act 1-X":"COLONNADE","Census":"COLONNADE","Manger":"COLONNADE","Resurrection":"PM","Act 2-Xa":"Offs","Alleluia":"OFFSTAGE","Act 2-Xb":"OFFSTAGE"},{"Last Name":"Rentz","First Name":"Hailey","Full Name":"Hailey Rentz","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"G6A","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Rentz","First Name":"Wendy","Full Name":"Wendy Rentz","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Deck","Act 2-Xa":"G6A","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Richmond","First Name":"Mark","Full Name":"Mark Richmond","Role":"Zacharias","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"OFFSTAGE","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Robinson","First Name":"Cal","Full Name":"Cal Robinson","Role":"Phillip, Angel to Nephi, Temple Priest 3-B","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Salinas","First Name":"Christina","Full Name":"Christina Salinas","Role":"Mary's Aunt 1","Temple":"Deck","Act 1-X":"G2","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Smith","First Name":"Natalie","Full Name":"Natalie Smith","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Smith","First Name":"Emma","Full Name":"Emma Smith","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Smith","First Name":"Sarah","Full Name":"Sarah Smith","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Smith","First Name":"Nathan","Full Name":"Nathan Smith","Role":"Temple Priest 9-H, Soldier 4, Samuel the Lamanite","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck (Role)","Manger":"Deck","Resurrection":"Colonnade (Role)","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Smith","First Name":"Stari ","Full Name":"Stari  Smith","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G2"},{"Last Name":"Sowby","First Name":"David","Full Name":"David Sowby","Role":"Temple Priest 1-K, Joseph of Arimatheia","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"MM","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Sowby","First Name":"Shannon","Full Name":"Shannon Sowby","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Deck","Act 2-Xa":"G2","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Stewart","First Name":"Jared","Full Name":"Jared Stewart","Role":"James, Nephi, Soldier 2","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Deck (Role)","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Stromberg","First Name":"Anne","Full Name":"Anne Stromberg","Role":"Mary's Aunt 2","Temple":"Deck","Act 1-X":"G3A","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Stromberg","First Name":"Evan","Full Name":"Evan Stromberg","Role":"Nephew 3","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"G3","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Stromberg","First Name":"Austin","Full Name":"Austin Stromberg","Role":"Temple Boy 6, Nephew 4","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"G3","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Stromberg","First Name":"David","Full Name":"David Stromberg","Role":"Temple Priest 11-J, Abinidi","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Taylor","First Name":"Jessica","Full Name":"Jessica Taylor","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Deck","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Underwood","First Name":"Darin","Full Name":"Darin Underwood","Role":"Matthew, Temple Priest 4-C","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck","Manger":"MM","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"},{"Last Name":"Underwood","First Name":"Kim","Full Name":"Kim Underwood","Role":"Mary's Mother","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"Deck (Role)","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Wagaman","First Name":"Elizabeth","Full Name":"Elizabeth Wagaman","Role":"Cousin 4","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Wagaman","First Name":"Noah","Full Name":"Noah Wagaman","Role":"Nephew 2","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G5"},{"Last Name":"Wagaman","First Name":"Mandy","Full Name":"Mandy Wagaman","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G5"},{"Last Name":"Wagaman","First Name":"Rowena","Full Name":"Rowena Wagaman","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Deck","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G5"},{"Last Name":"Wagaman","First Name":"Matthew","Full Name":"Matthew Wagaman","Role":"Angel to Shepherds, Ascension Angel 2","Temple":"COLONNADE","Act 1-X":"COLONNADE","Census":"COLONNADE","Manger":"COLONNADE","Resurrection":"PM","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Walker","First Name":"Arica","Full Name":"Arica Walker","Role":"Ensemble","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"G4","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Walker","First Name":"Abbie","Full Name":"Abbie Walker","Role":"Cousin 1","Temple":"Deck","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G5"},{"Last Name":"Walstad","First Name":"Nancy","Full Name":"Nancy Walstad","Role":"Rebekah","Temple":"Deck","Act 1-X":"G5","Census":"A1","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Walstad","First Name":"Emily","Full Name":"Emily Walstad","Role":"Ensemble","Temple":"Deck","Act 1-X":"G5","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"G2","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Walstad","First Name":"David","Full Name":"David Walstad","Role":"Ezra","Temple":"Deck (Role)","Act 1-X":"Deck (Role)","Census":"OFFSTAGE","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"G2","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Wardle","First Name":"Rhett","Full Name":"Rhett Wardle","Role":"Benjamin","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"G1","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Wardle","First Name":"Xander","Full Name":"Xander Wardle","Role":"Nathan","Temple":"SHEPHERD","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"Colonnade","Act 2-Xa":"G1","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Wardle","First Name":"Janey","Full Name":"Janey Wardle","Role":"Anna","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"Deck (Role)","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Wardle","First Name":"Tayson","Full Name":"Tayson Wardle","Role":"Amon","Temple":"Deck","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"SHEPHERD","Resurrection":"SM","Act 2-Xa":"G1","Alleluia":"OFFSTAGE","Act 2-Xb":"OFFSTAGE"},{"Last Name":"Wardle","First Name":"Andrew","Full Name":"Andrew Wardle","Role":"Disciple","Temple":"Deck","Act 1-X":"Deck","Census":"Deck","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Deck (Role)"},{"Last Name":"Wardle","First Name":"Tara","Full Name":"Tara Wardle","Role":"Miriam","Temple":"Deck","Act 1-X":"Deck","Census":"A1","Manger":"Colonnade","Resurrection":"OFFSTAGE","Act 2-Xa":"ALLELUIA","Alleluia":"ALLELUIA","Act 2-Xb":"FRUIT PICKING"},{"Last Name":"Whitchurch","First Name":"Jason","Full Name":"Jason Whitchurch","Role":"Temple Boy 2","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"H3","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Whitchurch","First Name":"Samuel","Full Name":"Samuel Whitchurch","Role":"Nephew 1","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Whitchurch","First Name":"Michelle","Full Name":"Michelle Whitchurch","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Whitchurch","First Name":"Natalie","Full Name":"Natalie Whitchurch","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Whitchurch","First Name":"Anna","Full Name":"Anna Whitchurch","Role":"Ensemble","Temple":"Colonnade","Act 1-X":"Colonnade","Census":"Colonnade","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Whitchurch","First Name":"Stephen","Full Name":"Stephen Whitchurch","Role":"Micham","Temple":"Deck (Role)","Act 1-X":"OFFSTAGE","Census":"C3","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"G3"},{"Last Name":"Williams","First Name":"Denise","Full Name":"Denise Williams","Role":"Elisabeth","Temple":"OFFSTAGE","Act 1-X":"OFFSTAGE","Census":"OFFSTAGE","Manger":"Colonnade","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Willis","First Name":"Mark","Full Name":"Mark Willis","Role":"Temple Priest 10-I, Soldier 3","Temple":"Deck (Role)","Act 1-X":"Colonnade","Census":"Deck (Role)","Manger":"Colonnade","Resurrection":"Deck","Act 2-Xa":"Colonnade","Alleluia":"OFFSTAGE","Act 2-Xb":"Colonnade"},{"Last Name":"Woodbury","First Name":"Kim","Full Name":"Kim Woodbury","Role":"Ensemble","Temple":"Deck","Act 1-X":"G2","Census":"Colonnade","Manger":"Deck","Resurrection":"Colonnade","Act 2-Xa":"Colonnade","Alleluia":"Colonnade","Act 2-Xb":"Colonnade"},{"Last Name":"Young","First Name":"Scott","Full Name":"Scott Young","Role":"Gabriel, Savior","Temple":"COLONNADE","Act 1-X":"COLONNADE","Census":"COLONNADE","Manger":"COLONNADE","Resurrection":"OFFSTAGE","Act 2-Xa":"OFFSTAGE","Alleluia":"OFFSTAGE","Act 2-Xb":"UPPER ROOM"}]
+    </script> 
+
+
+    <script> 
+
+
+        // Get the search input, card columns, and filter buttons
+        var searchInput = document.getElementById("searchInput");
+        var cardColumns = document.getElementById("cardColumns");
+        var filterButtonsContainer = document.getElementById("filterButtons");
+
+
+/* Populate the card columns with wider cards for each person
+
+function populateCards(data) {
+    cardColumns.innerHTML = ""; // Clear the card columns
+
+    data.forEach(function (person, index) {
+        var card = document.createElement("div");
+
+        var manger = person["Manger"] === "MM" ? "Mountain Mover" : person["Manger"];
+        var resurrection = person["Resurrection"] === "PM" ? "Plug Mover" : person["Resurrection"];
+
+        var group1X = person["Act 1-X"].startsWith("G") ? person["Act 1-X"].replace(/^G/, 'Group ') : person["Act 1-X"];
+        var group2Xa = person["Act 2-Xa"].startsWith("G") ? person["Act 2-Xa"].replace(/^G/, 'Group ') : person["Act 2-Xa"];
+        var group2Xb = person["Act 2-Xb"].startsWith("G") ? person["Act 2-Xb"].replace(/^G/, 'Group ') : person["Act 2-Xb"];
+
+        card.innerHTML = `
+            <div class="card">
+                <h5 class="card-header fw-bold">${person["Full Name"]}</h5>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr class="table-header">
+                            <th>Category</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Role(s):</td>
+                            <td>${person["Role"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Temple:</td>
+                            <td>${person["Temple"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Act 1-X:</td>
+                            <td>${group1X}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Census:</td>
+                            <td>${person["Census"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Manger:</td>
+                            <td>${manger}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Resurrection:</td>
+                            <td>${resurrection}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Act 2-Xa:</td>
+                            <td>${group2Xa}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Alleluia:</td>
+                            <td>${person["Alleluia"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category">Act 2-Xb:</td>
+                            <td>${group2Xb}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        `;
+        card.id = id = person["Full Name"];
+        cardColumns.appendChild(card);
+    });
+}
+*/
+
+// Populate the card columns with wider cards for each person
+function populateCards(data) {
+    cardColumns.innerHTML = ""; // Clear the card columns
+
+    data.forEach(function (person, index) {
+        var card = document.createElement("div");
+
+        var manger = person["Manger"] === "MM" ? "Mountain Mover" : person["Manger"];
+        var resurrection = person["Resurrection"] === "PM" ? "Plug Mover" : person["Resurrection"];
+
+        var group1X = person["Act 1-X"].startsWith("G") ? person["Act 1-X"].replace(/^G/, 'Group ') : person["Act 1-X"];
+        var group2Xa = person["Act 2-Xa"].startsWith("G") ? person["Act 2-Xa"].replace(/^G/, 'Group ') : person["Act 2-Xa"];
+        var group2Xb = person["Act 2-Xb"].startsWith("G") ? person["Act 2-Xb"].replace(/^G/, 'Group ') : person["Act 2-Xb"];
+
+        card.innerHTML = `
+            <div class="card">
+                <h5 class="card-header">${person["Full Name"]}</h5>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Role(s):</b></td>
+                            <td>${person["Role"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Temple:</b></td>
+                            <td>${person["Temple"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Act 1-X:</b></td>
+                            <td>${group1X}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Census:</b></td>
+                            <td>${person["Census"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Manger:</b></td>
+                            <td>${manger}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Resurrection:</b></td>
+                            <td>${resurrection}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Act 2-Xa:</b></td>
+                            <td>${group2Xa}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Alleluia:</b></td>
+                            <td>${person["Alleluia"]}</td>
+                        </tr>
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="table-category"><b>Act 2-Xb:</b></td>
+                            <td>${group2Xb}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        `;
+        card.id = id = person["Full Name"];
+        cardColumns.appendChild(card);
+    });
+}
+
+
+
+/* Populate the card columns with wider cards for each person (using plain tables)
+function populateCards(data) {
+    cardColumns.innerHTML = ""; // Clear the card columns
+
+    data.forEach(function (person) {
+        var card = document.createElement("div");
+
+        var manger = person["Manger"] === "MM" ? "Mountain Mover" : person["Manger"];
+        var resurrection = person["Resurrection"] === "PM" ? "Plug Mover" : person["Resurrection"];
+
+        var group1X = person["Act 1-X"].startsWith("G") ? person["Act 1-X"].replace(/^G/, 'Group ') : person["Act 1-X"];
+        var group2Xa = person["Act 2-Xa"].startsWith("G") ? person["Act 2-Xa"].replace(/^G/, 'Group ') : person["Act 2-Xa"];
+        var group2Xb = person["Act 2-Xb"].startsWith("G") ? person["Act 2-Xb"].replace(/^G/, 'Group ') : person["Act 2-Xb"];
+
+        card.innerHTML = `
+            <div class="card">
+                <h5 class="card-header">${person["Full Name"]}</h5>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td class="card-text">Role(s):</td>
+                            <td>${person["Role"]}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Temple:</td>
+                            <td>${person["Temple"]}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Act 1-X:</td>
+                            <td>${group1X}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Census:</td>
+                            <td>${person["Census"]}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Manger:</td>
+                            <td>${manger}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Resurrection:</td>
+                            <td>${resurrection}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Act 2-Xa:</td>
+                            <td>${group2Xa}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Alleluia:</td>
+                            <td>${person["Alleluia"]}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-text">Act 2-Xb:</td>
+                            <td>${group2Xb}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        `;
+        card.id = id = person["Full Name"];
+        cardColumns.appendChild(card);
+    });
+}
+*/
+
+
+
+        // Populate the card columns with wider cards for each person
+        function populateCardsList(data) {
+            cardColumns.innerHTML = ""; // Clear the card columns
+
+            data.forEach(function(person) {
+                var card = document.createElement("div");
+                
+                // <li class="card-text">Act 2-Xa: ${person["Act 2-Xa"]}</li>
+                // <li class="card-text">Act 2-Xb: ${person["Act 2-Xb"]}</li>
+                // <li class="card-text">Manger: ${person["Manger"]}</li>
+                // <li class="card-text">Resurrection: ${person["Resurrection"]}</li>
+
+                var manger        = person["Manger"]       === "MM" ? "Mountain Mover" : person["Manger"]
+                var resurrection  = person["Resurrection"] === "PM" ? "Plug Mover"     : person["Resurrection"]
+
+                var group1X  = person["Act 1-X"].startsWith("G") ? person["Act 1-X"].replace(/^G/, 'Group ') : person["Act 1-X"]
+                var group2Xa = person["Act 2-Xa"].startsWith("G") ? person["Act 2-Xa"].replace(/^G/, 'Group ') : person["Act 2-Xa"]
+                var group2Xb = person["Act 2-Xb"].startsWith("G") ? person["Act 2-Xb"].replace(/^G/, 'Group ') : person["Act 2-Xb"]
+
+                card.innerHTML = `
+                    <div class="card">
+                        <h5 class="card-header">${person["Full Name"]}</h5>
+                        <div class="card-body">
+                            <ul>
+                                <li class="card-text">Role(s): ${person["Role"]}</li>
+                                <li class="card-text">Temple: ${person["Temple"]}</li>
+                                <li class="card-text">Act 1-X: ${group1X} </li>
+                                <li class="card-text">Census: ${person["Census"]}</li>
+                                <li class="card-text">Manger: ${manger}</li>
+                                <li class="card-text">Resurrection: ${resurrection}</li>
+                                <li class="card-text">Act 2-Xa: ${group2Xa}</li>
+                                <li class="card-text">Alleluia: ${person["Alleluia"]}</li>
+                                <li class="card-text">Act 2-Xb: ${group2Xb}</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                card.id = id=person["Full Name"]
+                cardColumns.appendChild(card);
+            });
+        }
+
+            // Populate the card columns with wider cards for each person
+        // function populateCards(data) {
+        //     cardColumns.innerHTML = ""; // Clear the card columns
+
+        //     data.forEach(function(person) {
+        //         var col = document.createElement("div");
+        //         col.className = "col-12"; // Full-width column
+
+        //         var card = document.createElement("div");
+        //         card.className = "card mb-3";
+
+        //         var cardBody = document.createElement("div");
+        //         cardBody.className = "card-body";
+
+        //         // Loop over each property and create <li> elements
+        //         for (var property in person) {
+        //             if (person.hasOwnProperty(property)) {
+        //                 var li = document.createElement("li");
+        //                 li.textContent = `${property}: ${person[property]}`;
+        //                 cardBody.appendChild(li);
+        //             }
+        //         }
+
+        //         card.appendChild(cardBody);
+        //         col.appendChild(card);
+        //         cardColumns.appendChild(col);
+        //     });
+        // }
+
+
+
+        // Generate filter buttons for unique last names
+        function generateFilterButtons(data) {
+            // var lastNames = data.map(function(person) {
+            //     return person["Last Name"];
+            // });
+            var lastNames = data.map(function(person) {
+                return person["Last Name"].charAt(0).toUpperCase();
+            });
+            var uniqueLastNames = Array.from(new Set(lastNames));
+
+            // Create buttons for each unique last name
+            uniqueLastNames.forEach(function(lastName) {
+                var button = document.createElement("button");
+                button.type = "button";
+                button.className = "btn filter mr-1 btn-secondary";
+                button.setAttribute("data-letter", lastName.charAt(0).toUpperCase());
+                button.textContent = lastName.charAt(0).toUpperCase();
+                filterButtonsContainer.appendChild(button);
+            });
+        }
+
+        // Initial population of wider cards
+        populateCards(jsonData);
+
+        // Generate and initialize filter buttons
+        generateFilterButtons(jsonData);
+
+        // Add an event listener for the search input
+        searchInput.addEventListener("input", function() {
+            roleFilterInput.value = ""
+
+            var searchValue = searchInput.value.toLowerCase();
+            var filteredData = jsonData.filter(function(person) {
+                return person["Full Name"].toLowerCase().includes(searchValue);
+            });
+            populateCards(filteredData);
+        });
+
+        // Add event listeners for filter buttons
+        var filterButtons = document.querySelectorAll(".filter");
+        filterButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var letter = button.getAttribute("data-letter");
+                if (letter === "all") {
+                    populateCards(jsonData);
+                } else {
+                    var filteredData = jsonData.filter(function(person) {
+                        return person["Last Name"].charAt(0).toUpperCase() === letter;
+                    });
+                    populateCards(filteredData);
+                }
+            });
+        });
+
+
+        // Get the role filter input element
+        var roleFilterInput = document.getElementById("roleFilter");
+
+        // Add an input event listener to filter cards when the input changes
+        roleFilterInput.addEventListener("input", filterByRole);
+
+        function filterByRole() {
+            var filterValue = roleFilterInput.value.toLowerCase();
+            searchInput.value = ""
+
+            populateCards(jsonData);
+
+            jsonData.forEach(function(person) {
+                var card = document.getElementById(person["Full Name"]);
+                var role = person["Role"].toLowerCase();
+
+                if (role.includes(filterValue)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
