@@ -9,6 +9,12 @@
         .card>h5 {
             background-color: #C6D5A1;
         }
+
+        @media (min-width: 576px) { .card-columns { column-count: 1; }}
+        @media (min-width: 768px) { .card-columns { column-count: 2; }}
+        @media (min-width: 992px) { .card-columns { column-count: 3; }}
+
+
     </style>
 </head>
 <body>
@@ -128,6 +134,7 @@ function populateCards(data) {
 }
 */
 
+// TABLE
 // Populate the card columns with wider cards for each person
 function populateCards(data) {
     cardColumns.innerHTML = ""; // Clear the card columns
@@ -145,8 +152,8 @@ function populateCards(data) {
         card.innerHTML = `
             <div class="card">
                 <h5 class="card-header">${person["Full Name"]}</h5>
-                <div class="card-body">
-                    <table class="table table-striped">
+                <div class="card-body table-responsive">
+                    <table class="table table-striped table-sm">
                         <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
                             <td class="table-category"><b>Role(s):</b></td>
                             <td>${person["Role"]}</td>
