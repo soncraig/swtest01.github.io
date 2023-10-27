@@ -355,7 +355,7 @@ function populateCards(data) {
             uniqueLastNames.forEach(function(lastName) {
                 var button = document.createElement("button");
                 button.type = "button";
-                button.className = "btn filter mr-1 btn-secondary";
+                button.className = "btn filter mr-1 btn-secondary btn-lg";
                 button.setAttribute("data-letter", lastName.charAt(0).toUpperCase());
                 button.textContent = lastName.charAt(0).toUpperCase();
                 filterButtonsContainer.appendChild(button);
